@@ -18,30 +18,33 @@ type jsonPropsData = {
 }[];
 
 const Home = ({ params }: { params: any }) => {
-  const [json, setJson] = useState<jsonPropsData>(data || []);
+  console.log(params);
+  const filterData: any = data.find((item) => item.url === `/${params.slug}`);
+  console.log(filterData);
+  const [json, setJson] = useState<jsonPropsData>(filterData);
 
   function handleOnClick(toggleData: componentProps) {
     //  match specific component
-    const isMatchComponent = json[0].components?.find(
+    const isMatchComponent = json?.components?.find(
       (item) => item.name === toggleData.open
     );
-    // console.log(isMatchComponent?.toggle);
+    // console.log(isMatchComponent);
     let updateMatchComponent = {
       ...isMatchComponent,
       toggle: !isMatchComponent?.toggle,
     };
     // update json data
-    let updateJsonData: jsonPropsData | Object[] = json.map((item) => {
-      const value = item.components?.map((component) => {
-        if (component.id === updateMatchComponent.id) {
-          return updateMatchComponent;
-        } else {
-          return component;
-        }
-      });
-      return { ...item, components: value || [] };
+
+    const value = json?.components?.map((component) => {
+      if (component.id === updateMatchComponent.id) {
+        return updateMatchComponent;
+      } else {
+        return component;
+      }
     });
-    setJson(updateJsonData);
+    let updateObject = { ...json, components: value || [] };
+
+    setJson(updateObject);
   }
   const globalClickHandler = (data: componentProps) => {
     return React.createElement(
@@ -53,10 +56,10 @@ const Home = ({ params }: { params: any }) => {
       data.text // Fix: Add 'text' property to 'componentProps' type definition
     );
   };
-  console.log(json);
+  // console.log(json);
   return (
     <div>
-      {json[0]?.components?.map((item: any, index: number) => (
+      {json?.components?.map((item: any, index: number) => (
         <div key={index}>
           {item?.type === "button" && globalClickHandler(item)}
           {item?.type === "modal" && item.toggle === true && (
