@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Toggle</title>
+    <style>
+        .section {
+            background-color: rgba(112, 74, 74, 0.507);
+        }
+
+        .dropzone {
+            width: 200px;
+            height: 20px;
+            background: blueviolet;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<section class="section">
+    <div id="draggable" draggable="true">Button div</div>
+    <div class="dropzone" id="droptarget"></div>
+</section>
+<script>
+    let dragged = null;
+    const draggable = document.getElementById('draggable');
+    const target = document.getElementById("droptarget");
+    draggable.addEventListener("drag", (e) => {
+        // console.log(e);
+    })
+    draggable.addEventListener("dragend", (e) => {
+        // console.log(e);
+    })
+    draggable.addEventListener("dragenter", (e) => {
+        // console.log(e);
+    })
+    draggable.addEventListener("dragleave", (e) => {
+        // console.log(e);
+    })
+    draggable.addEventListener("dragover", (e) => {
+        // console.log(e);
+    })
+    draggable.addEventListener("dragstart", (e) => {
+        // console.log(e);
+    })
+    draggable.addEventListener("drop", (e) => {
+        console.log(e);
+    })
+
+</script>
+</body>
+
+</html>

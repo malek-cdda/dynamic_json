@@ -1,95 +1,88 @@
-import Image from "next/image";
+"use client";
+import CustomHooks from "@/components/hooks/customeHooks";
 import styles from "./page.module.css";
+import React from "react";
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+  // const data = {
+  //   type: "button",
+  //   text: "Click me",
+  //   onClick: `handleClick.bind(null,"open")`,
+  //   style: {
+  //     backgroundColor: "red",
+  //     color: "white",
+  //     cursor: "pointer",
+  //   },
+  // };
+  // const handleClick = (action: string) => {
+  //   console.log("Button clicked", action);
+  // };
+  // const buttons = React.createElement(
+  //   "button",
+  //   {
+  //     onClick: eval(`(${data.onClick})`),
+  //     style: data.style,
+  //   },
+  //   data.text
+  // );
+  const data = [
+    {
+      type: "sidebarToggle",
+      toggle: true,
+    },
+    {
+      type: "modalToggle",
+      toggle: true,
+      data: {
+        id: "123",
+        name: "modal",
+      },
+    },
+  ];
+  const returnComponent = data.map((item, index) => {
+    switch (item.type) {
+      case "sidebarToggle":
+        return <Sidebar key={index} item={item} />;
+        break;
+      case "modalToggle":
+        return <Modal key={index} item={item} />;
+        break;
+      default:
+        break;
+    }
+  });
+  // const [value, setValue] = CustomHooks(buttons);
+  return <main className={styles.main}>{returnComponent}</main>;
 }
+
+const Sidebar = ({
+  item,
+}: {
+  item: {
+    type: string;
+    toggle: boolean;
+    data?: Object;
+  };
+}) => {
+  const [value, setValue] = CustomHooks(item?.toggle);
+  return (
+    <aside className={styles.sidebar}>
+      <button onClick={() => setValue(!value)}>Toggle</button>
+    </aside>
+  );
+};
+
+const Modal = ({
+  item,
+}: {
+  item: { type: string; toggle: boolean; data?: Object };
+}) => {
+  const [value, setValue] = CustomHooks(item?.toggle);
+  return (
+    <aside className={styles.sidebar}>
+      <>
+        <button onClick={() => setValue(!value)}>Toggle</button>
+      </>
+    </aside>
+  );
+};

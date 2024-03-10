@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import DynamicContext from "@/context/DynamicContext";
+import Link from "next/link";
+
+import { data } from "@/data/urlData";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +20,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {data.map((page, index) => (
+          <Link key={index} href={page.url}>
+            <span
+              className="border-2 border-black px-2"
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                textDecoration: "none",
+                padding: "5px",
+              }}>
+              {" "}
+              {page.url}
+            </span>
+          </Link>
+        ))}
+        <DynamicContext> {children}</DynamicContext>
+      </body>
     </html>
   );
 }
