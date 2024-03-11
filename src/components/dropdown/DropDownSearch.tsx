@@ -16,8 +16,8 @@ const DropDownSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
-  const [localValue, setLocalValue] = useState([]);
-  const [localKeyValue, setLocalKeyValue] = useState([]);
+  const [localValue, setLocalValue] = useState<any>([]);
+  const [localKeyValue, setLocalKeyValue] = useState<any>([]);
   const options: string[] = ["localstorage", "session", "cookie"];
   useEffect(() => {
     setFilteredOptions(options);
@@ -25,11 +25,11 @@ const DropDownSearch = () => {
   function toggleDropdown() {
     setShowDropdown(!showDropdown);
   }
-
+  // onfocus to active dropdown
   function handleFocus() {
-    setShowDropdown(!showDropdown);
+    setShowDropdown(true);
   }
-
+  // onblur to remove dropdown
   function handleBlur() {
     setTimeout(() => {
       setShowDropdown(false);
@@ -38,9 +38,9 @@ const DropDownSearch = () => {
   //   for give any value in input field value change here
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const searchTerm = event.target.value;
-    console.log(searchTerm);
-    setSearchTerm(searchTerm);
 
+    setSearchTerm(searchTerm);
+    // filter using search value
     const filteredOptions = options.filter((option) =>
       option.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -56,6 +56,7 @@ const DropDownSearch = () => {
   const [localStorageData, setLocalStorageData] = useState(
     JSON.parse(localStorage.getItem("customBrowserStorageData") || "{}")
   );
+  // store data in localstorage
   localStorage.setItem(
     "customBrowserStorageData",
     JSON.stringify({
@@ -65,7 +66,7 @@ const DropDownSearch = () => {
   );
 
   // update any value and key here
-  const handleLocalStorageUpdateArea = (value) => {
+  const handleLocalStorageUpdateArea = (value: any) => {
     setLocalValue([value[0], value[1]]);
     setLocalKeyValue([value[0], value[1]]);
   };
@@ -82,7 +83,9 @@ const DropDownSearch = () => {
   };
   return (
     <div>
+      {/* combo box label area code  */}
       <ComboSearchLabel>
+        {/* search field  */}
         <input
           type="text"
           placeholder="Search.."
