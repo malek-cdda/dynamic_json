@@ -24,7 +24,7 @@ const Home = ({ params }: { params: any }) => {
   function handleOnClick(toggleData: componentProps) {
     //  match specific component
     const isMatchComponent = json?.components?.find(
-      (item) => item.name === toggleData.open
+      (item: any) => item.name === toggleData.open
     );
     console.log(isMatchComponent);
     let updateMatchComponent = {
@@ -32,7 +32,7 @@ const Home = ({ params }: { params: any }) => {
       toggle: !isMatchComponent?.toggle,
     };
     // update json data
-    const value = json?.components?.map((component) => {
+    const value = json?.components?.map((component: any) => {
       if (component.id === updateMatchComponent.id) {
         return updateMatchComponent;
       } else {
