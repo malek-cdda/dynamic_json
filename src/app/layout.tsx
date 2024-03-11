@@ -36,7 +36,7 @@ export default function RootLayout({
             </span>
           </Link>
         ))}
-        <Link href="/drop/drops">Combo Box</Link>
+        <Link href="/combobox/box">Combo Box</Link>
         <DynamicContext> {children}</DynamicContext>
       </body>
     </html>
