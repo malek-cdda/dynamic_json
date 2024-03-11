@@ -1,5 +1,5 @@
 import React from "react";
-import { json } from "stream/consumers";
+
 export type componentProps = {
   name?: string;
   type: string;
@@ -24,7 +24,7 @@ export function handleOnClick(
   const isMatchComponent = json?.components?.find(
     (item) => item.name === toggleData.open
   );
-  // console.log(isMatchComponent);
+  console.log(isMatchComponent);
   let updateMatchComponent = {
     ...isMatchComponent,
     toggle: !isMatchComponent?.toggle,
@@ -38,6 +38,7 @@ export function handleOnClick(
     }
   });
   let updateObject = { ...json, components: value || [] };
+  // console.log(updateObject);
   setJson(updateObject);
 }
 export const globalClickHandler = (data: componentProps, setJson, json) => {
