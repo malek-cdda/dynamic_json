@@ -9,12 +9,13 @@ const GetState = (states) => {
   const initialState: Obj = {};
   //? Populate the initialState object based on the data
   states.forEach((item: { name: string; value: any }) => {
+    console.log(item, "come from state");
     initialState[item.name] = item.value;
   });
-  //?  initialize state
+  // ?!  initialize state
   const [state, setState] = useState(initialState);
 
-  //?  function to update state values
+  //?!  function to update state values
   const setStateValue = (name: string, newValue: any) => {
     setState((prevState: Obj) => ({
       ...prevState,

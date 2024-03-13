@@ -16,8 +16,6 @@ const DropDownSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
-  const [localValue, setLocalValue] = useState<any>([]);
-  const [localKeyValue, setLocalKeyValue] = useState<any>([]);
   const options: string[] = ["localstorage", "session", "cookie"];
   useEffect(() => {
     setFilteredOptions(options);
@@ -66,14 +64,13 @@ const DropDownSearch = () => {
   );
 
   // update any value and key here
+  const [keysValue, setkeysValue] = useState({ key: "", value: "" });
   const handleLocalStorageUpdateArea = (value: any) => {
-    setLocalValue([value[0], value[1]]);
-    setLocalKeyValue([value[0], value[1]]);
+    setkeysValue({ value: localStorageData[value], key: value });
   };
   // dont want to update and save you cancel it
   const clearUpdateFunction = () => {
-    setLocalValue([]);
-    setLocalKeyValue([]);
+    setkeysValue({});
   };
   // save then it gone inital position
 
@@ -130,37 +127,34 @@ const DropDownSearch = () => {
           {Object.keys(localStorageData).map((key, index) => (
             <StorageAreaWrapper key={index}>
               <PropertyArea>
-                {index === localKeyValue[1] ? "" : <span> {key}</span>}
-                {index === localKeyValue[1] && (
+                {keysValue.key !== key && <span> {key}</span>}
+                {keysValue.key === key && (
                   <SearchBar
                     type="text"
                     placeholder="edit property"
                     defaultValue={key || ""}
                   />
                 )}
-                {index === localValue[1] ? (
-                  ""
-                ) : (
+                {keysValue.value !== localStorageData[key] && (
                   <span> {localStorageData[key]}</span>
                 )}
-                {index === localValue[1] && (
+                {keysValue.value === localStorageData[key] && (
                   <SearchBar
                     type="text"
                     placeholder="edit property"
-                    defaultValue={localStorageData[localValue[0]] || ""}
+                    defaultValue={localStorageData[key] || ""}
                   />
                 )}
               </PropertyArea>
               <ActionArea>
-                <Button
-                  onClick={() => handleLocalStorageUpdateArea([key, index])}>
+                <Button onClick={() => handleLocalStorageUpdateArea(key)}>
                   Edit
                 </Button>
                 <Button>Delete</Button>
               </ActionArea>
             </StorageAreaWrapper>
           ))}
-          {localKeyValue?.length ? (
+          {keysValue?.key ? (
             <FooterActionArea>
               <button onClick={() => clearUpdateFunction()}>cancel</button>
               <button onClick={() => saveAllInfo()}>save</button>
@@ -187,7 +181,7 @@ const DropDownSearch = () => {
             </p>
             <p>value</p>
           </div>
-          {Object.keys(localStorageData).map((key, index) => (
+          {Object.keysValue(localStorageData).map((key, index) => (
             <StorageAreaWrapper key={index}>
               <PropertyArea>
                 {index === localKeyValue[1] ? "" : <span> {key}</span>}
@@ -247,7 +241,7 @@ const DropDownSearch = () => {
             </p>
             <p>value</p>
           </div>
-          {Object.keys(localStorageData).map((key, index) => (
+          {Object.keysValue(localStorageData).map((key, index) => (
             <StorageAreaWrapper key={index}>
               <PropertyArea>
                 {index === localKeyValue[1] ? "" : <span> {key}</span>}

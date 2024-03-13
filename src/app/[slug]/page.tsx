@@ -1,8 +1,7 @@
 "use client";
 
-import { globalClickHandler, jsonPropsData } from "@/components/utils/utils";
 import { data } from "@/data/urlData";
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, { useState } from "react";
 export type componentProps = {
   name?: string;
   type: string;
@@ -19,14 +18,16 @@ export type jsonPropsData = {
 }[];
 
 const Home = ({ params }: { params: any }) => {
+  // page wise data seperate here
   const filterData: any = data.find((item) => item.url === `/${params.slug}`);
   const [json, setJson] = useState<jsonPropsData>(filterData);
+  // global click function to organis component
   function handleOnClick(toggleData: componentProps) {
     //  match specific component
     const isMatchComponent = json?.components?.find(
       (item: any) => item.name === toggleData.open
     );
-    console.log(isMatchComponent);
+    // update component
     let updateMatchComponent = {
       ...isMatchComponent,
       toggle: !isMatchComponent?.toggle,
@@ -43,6 +44,7 @@ const Home = ({ params }: { params: any }) => {
     // console.log(updateObject);
     setJson(updateObject);
   }
+  // click function here
   const globalClickHandler = (data: componentProps) => {
     return React.createElement(
       data?.type,

@@ -36,7 +36,17 @@ export default function RootLayout({
             </span>
           </Link>
         ))}
-        <Link href="/combobox/box">Combo Box</Link>
+        <Link
+          href="/combobox/box"
+          style={{
+            color: "white",
+            fontWeight: "bold",
+            textDecoration: "none",
+            padding: "5px",
+          }}>
+          Combo Box
+        </Link>
+        <Link href="/tableDynamic/table">Table</Link>
         <DynamicContext> {children}</DynamicContext>
       </body>
     </html>

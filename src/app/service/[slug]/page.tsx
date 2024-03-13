@@ -1,5 +1,6 @@
 import { Pages } from "@/data/data";
 import React from "react";
+import ClientSideRenderring from "./components/components/ClientSideRendering";
 // import ClientSideRenderring from "../service/[slug]/components/components/ClientSideRendering";
 
 async function getData(url: string) {
@@ -8,7 +9,8 @@ async function getData(url: string) {
 }
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-  const filteredPage = Pages.find((page) => page.url === `/${params.slug}`);
+  console.log(params, "kire");
+  const filteredPage = Pages.find((page) => page.urls === `/${params.slug}`);
 
   const userPromises = filteredPage?.apis.map(async (api) => ({
     [api.data]: await getData(api.url),

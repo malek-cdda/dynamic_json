@@ -34,6 +34,7 @@ export const Pages = [
   {
     title: "test",
     url: "/test",
+    urls: "/test",
     dataProperty: "data",
 
     apis: [
@@ -152,6 +153,7 @@ export const Pages = [
   {
     title: "tests",
     url: "/tests",
+    urls: "/tests",
     dataProperty: "data",
     apis: [
       {
@@ -293,6 +295,30 @@ export const Pages = [
         },
 
         dataProperty: "yeasir3",
+      },
+      {
+        index: 4,
+        tag: "button",
+        //? here we can add onClick function and we can update our states
+        onClick: `function(){
+                    setStateValue("yeasir", state["yeasir"]+1)
+                }`,
+        style: {
+          marginTop: "5px",
+          border: "4px solid",
+          borderRadius: "10px",
+          padding: "10px",
+          borderColor: "purple",
+          backgroundColor: "gray",
+          height: "100px",
+          width: "50%",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "10px",
+        },
+        dataProperty: "button",
       },
       {
         index: 4,

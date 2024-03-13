@@ -38,6 +38,7 @@ export default function ClientSideRenderring({
 
   //? call functions by function name
   function callFunction(name: string) {
+    console.log(name, "name");
     functionMap[name]();
   }
 
@@ -51,6 +52,7 @@ export default function ClientSideRenderring({
         });
         useEffect(() => {
           const hookFn = jsonToFunction(hook, "hook");
+
           hookFn();
         }, [dependencyArray]);
       }
@@ -60,7 +62,7 @@ export default function ClientSideRenderring({
   return (
     <div className="relative">
       {parentDiv.map((pd, i) => {
-        // define parent tag
+        // define parent tagA
         const ParentTag = pd.tag;
 
         //! Function to execute the onClickFunction from JSON

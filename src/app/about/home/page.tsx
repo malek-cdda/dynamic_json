@@ -1,7 +1,6 @@
 "use client";
 import { table } from "console";
 import React from "react";
-import _ from "lodash";
 // Assuming dNode is an object or an array
 function isEmpty(obj) {
   if (typeof obj === "object" && Object.keys(obj).length === 0) {
@@ -32,9 +31,9 @@ function createComponent(dNode: any, h: any): any {
     });
   }
 
-  const prop = { ...dNode.properties } || {};
+  const prop = { ...dNode?.properties } || {};
   prop.key = Date.now() + "." + Math.random(1000);
-  console.log(dNode.properties);
+
   return h(
     dNode.tagName,
     // properties,
