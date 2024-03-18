@@ -49,9 +49,6 @@ const Home = () => {
   //   const uses = use(promise);
   //   console.log(uses);
 
-  for (let i = 0; i < 230; i++) {
-    console.log(parseInt(Math.random() * Date.now()));
-  }
   return (
     <div>
       <h2>Choose password</h2>

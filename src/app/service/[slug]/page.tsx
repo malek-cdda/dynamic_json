@@ -28,7 +28,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
       .catch((error) => {
         console.error(error);
       })) || {};
-
+  console.log(data);
   return (
     <React.Fragment>
       <ClientSideRenderring

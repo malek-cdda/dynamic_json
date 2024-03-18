@@ -14,6 +14,11 @@ function isEmpty(obj) {
 
 const Home = () => {
   const [count, setCount] = useState(0);
+  let objs = {
+    name: "no body touch me",
+    togle: "ok boss",
+  };
+  const [obj, setObj] = useState({});
   function createComponent(dNode: any, h: any): any {
     if (isEmpty(dNode)) {
       return [];
@@ -55,10 +60,11 @@ const Home = () => {
     // console.log(createComponent(nodes, React.createElement));
     return createComponent(nodes, React.createElement);
   }
-  let handleClick = (fcn) => {
+  let handleClick = (fcn: any) => {
     setCount(count + 1);
     const funcString = eval(`(${fcn})`)();
-    console.log(funcString);
+
+    setObj(funcString);
   };
 
   const nodes = {
@@ -285,32 +291,24 @@ const Home = () => {
       },
     ],
   };
-  const sortData = (data) => {
-    if (data.children && data.children.length > 0) {
-      data.children.sort((a, b) => {
-        // Assuming you want to sort based on the first child's text content
-        const textA =
-          a?.children?.length && a?.children[0]?.textNode?.toUpperCase();
-        const textB =
-          b?.children?.length && b?.children[0]?.textNode?.toUpperCase();
-        if (textA < textB) return -1;
-        if (textA > textB) return 1;
-        return 0;
-      });
-      // Recursively sort children
-      const datas = data.children.map((child) => sortData(child));
-    }
-  };
 
-  // Call the sorting function
-  sortData(nodes);
+  for (let key in objs) {
+    if (obj[key] === objs[key]) {
+      console.log("what is the problem", obj[key] === objs[key]);
+    }
+  }
 
   // console.log(JSON.stringify(nodes, null, 2));
   return (
     <div>
+      {React.createElement(Comp, { value: "abul malek" })}
       {UIEngines(nodes)} {count}{" "}
     </div>
   );
 };
 
 export default Home;
+
+const Comp = ({ value = "sdfsd" }) => {
+  return React.createElement("div", null, value);
+};
